@@ -6,6 +6,27 @@
 	objectVersion = 46;
 	objects = {
 
+<path to jdksmidi>/build/android/Android.mk
+APP_STL := stlport_shared
+APP_STL := stlport_static
+
+LOCAL_PATH := $(call my-dir)
+JDKSMIDI_PATH := $(LOCAL_PATH)/../../
+
+include $(CLEAR_VARS)
+
+LOCAL_PATH := $(JDKSMIDI_PATH)
+LOCAL_MODULE:= jdksmidi
+LOCAL_MODULE_FILENAME:= libjdksmidi
+LOCAL_CFLAGS := -I$(JDKSMIDI_PATH)/include
+LOCAL_EXPORT_C_INCLUDES := $(JDKSMIDI_PATH)/include
+
+MY_PREFIX := $(JDKSMIDI_PATH)
+MY_SOURCES := $(wildcard $(MY_PREFIX)/src/*.cpp)
+LOCAL_SRC_FILES := $(MY_SOURCES:$(MY_PREFIX)%=%)
+
+include $(BUILD_STATIC_LIBRARY)
+
 /* Begin PBXBuildFile section */
 		6044028916D0A68500B5C7DF /* FingerPositionY.h in Headers */ = {isa = PBXBuildFile; fileRef = 6044028816D0A68500B5C7DF /* FingerPositionY.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3027D2316DDB4810026718C /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3027D2216DDB4810026718C /* CoreMIDI.framework */; };
